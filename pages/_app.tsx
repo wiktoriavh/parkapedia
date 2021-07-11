@@ -1,14 +1,17 @@
 import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import { Main } from '../components/layouts/Main';
 import { appWithTranslation } from 'next-i18next';
+import type { AppProps } from 'next/app';
+
+import { TopNavbar } from '../components/layouts/TopNavbar';
+import { ThemeProvider } from 'react-jss';
+import { parkasaurusTheme } from '../utils/colors';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Main />
+    <ThemeProvider theme={parkasaurusTheme}>
+      <TopNavbar />
       <Component {...pageProps} />
-    </>
+    </ThemeProvider>
   );
 }
 // export default MyApp;
