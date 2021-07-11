@@ -1,11 +1,25 @@
 import { createElement, ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
 import { DinoFootprintIcon } from '../SvgIcons/DinoFootprint';
-import clsx from 'clsx';
+
+
+type ComponentVariantTypes =
+  | 'h1'
+  | 1
+  | 'h2'
+  | 2
+  | 'h3'
+  | 3
+  | 'h4'
+  | 4
+  | 'h5'
+  | 5
+  | 'h6'
+  | 6;
 
 type HeadingProps = {
-  variant: string | number;
-  component?: string | number;
+  variant?: ComponentVariantTypes;
+  component: ComponentVariantTypes;
   children: ReactNode;
 };
 
