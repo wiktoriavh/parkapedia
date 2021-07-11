@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -11,8 +11,8 @@ const useStyles = createUseStyles({
   },
 });
 
-export const Paragraph = ({ children }: { children: ReactNode }) => {
+export function Paragraph({ children }: { children: ReactNode }) {
   const classes = useStyles();
 
   return <p className={classes.paragraph}>{children}</p>;
-};
+}

@@ -1,5 +1,8 @@
-import { createElement, ReactNode } from 'react';
+import clsx from 'clsx';
+import type { ReactNode } from 'react';
+import { createElement } from 'react';
 import { createUseStyles } from 'react-jss';
+
 import { DinoFootprintIcon } from '../SvgIcons/DinoFootprint';
 
 
@@ -45,7 +48,7 @@ const useStyles = createUseStyles({
   },
 });
 
-export const Heading = ({ variant, component, children }: HeadingProps): JSX.Element => {
+export function Heading({ variant, component, children }: HeadingProps): JSX.Element {
   const classes = useStyles();
 
   if (typeof variant === 'number') {
@@ -70,11 +73,9 @@ export const Heading = ({ variant, component, children }: HeadingProps): JSX.Ele
     <DinoFootprintIcon />
   );
 
-  const Heading = createElement(
-    component ? component : variant,
-    { className: clsx(classes.heading, headingStyle[variant]) },
+  return createElement(
+    component,
+    { className: clsx(classes.heading, headingStyle[variant ? variant : component]) },
     [HeadingLink, children]
   );
-
-  return Heading;
-};
+}

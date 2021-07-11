@@ -1,15 +1,18 @@
+import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Heading } from '../components/typography/Heading';
 
-export default function Home() {
+import { Heading } from '../components/typography/Heading';
+import { Locale } from '../utils/i18nextTypes';
+
+export default function Home(): JSX.Element {
   return (
     <div>
-      <Heading variant={1}>I am a title</Heading>
+      <Heading component={1}>I am a title</Heading>
     </div>
   );
 }
 
-export async function getStaticProps({ locale }: { locale: string | undefined }) {
+export const getStaticProps = async ({ locale }: { locale: Locale }) => {
   if (!locale) {
     throw new Error('locale is undefined.');
   }
@@ -19,4 +22,4 @@ export async function getStaticProps({ locale }: { locale: string | undefined })
       ...(await serverSideTranslations(locale, ['common'])),
     },
   };
-}
+};
