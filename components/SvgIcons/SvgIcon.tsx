@@ -1,17 +1,11 @@
-import { ReactNode } from 'react';
+import type { SVGProps, PropsWithoutRef } from 'react';
 
-export type SvgIconProps = {
-  viewBox?: string;
-  width?: string | number;
-  height?: string | number;
-  xmlns?: string;
-};
-
-export const SvgIcon = (props: SvgIconProps & { children: ReactNode }): JSX.Element => {
+export type SvgIconProps = PropsWithoutRef<SVGProps<SVGElement>>;
+export function SvgIcon(props: SvgIconProps): JSX.Element {
   const { children, ...other } = props;
 
   return <svg {...other}>{children}</svg>;
-};
+}
 
 SvgIcon.defaultProps = {
   viewBox: '0 0 24 24',
