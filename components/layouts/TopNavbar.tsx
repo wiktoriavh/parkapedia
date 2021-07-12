@@ -4,6 +4,7 @@ import { createUseStyles } from 'react-jss';
 
 import { maxWidth } from '../../utils/breakpoints';
 import { topNavigations } from '../../utils/topNavigation';
+import { MenuListItem } from '../typography/MenuListItem';
 
 const useStyles = createUseStyles({
   topNavigation: {
@@ -35,11 +36,7 @@ export function TopNavbar(): JSX.Element {
       <ul className={classes.topNavigationList}>
         {topNavigations.map((navigation, index) => {
           return (
-            <li key={`${index}-${navigation.name}`}>
-              <Link href={navigation.href}>
-                <a>{t(navigation.name)}</a>
-              </Link>
-            </li>
+                <MenuListItem href={navigation.href} key={`${index}-${navigation.name}`}>{t(navigation.name)}</MenuListItem>
           );
         })}
       </ul>
