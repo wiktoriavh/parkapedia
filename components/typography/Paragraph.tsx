@@ -6,7 +6,7 @@ const useStyles = createUseStyles({
     fontFamily: 'Poppins',
     fontWeight: 400,
     fontSize: 20,
-    lineHeight: 35,
+    lineHeight: 1.7,
     marginLeft: 20,
   },
 });
