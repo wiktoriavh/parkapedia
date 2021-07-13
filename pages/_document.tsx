@@ -6,6 +6,7 @@ import NextDocument, {
   NextScript,
 } from 'next/document';
 import { SheetsRegistry, JssProvider, createGenerateId } from 'react-jss';
+import { creme } from '../utils/colors';
 
 export default function ParkasaurusDocument(): JSX.Element {
   return (
@@ -14,7 +15,7 @@ export default function ParkasaurusDocument(): JSX.Element {
         <link rel="stylesheet" href="https://use.typekit.net/zao8law.css" />
         <meta content="Wiktoria Mielcarek" name="authro" />
       </Head>
-      <body>
+      <body style={{backgroundColor: creme}}>
         <Main />
         <NextScript />
       </body>
