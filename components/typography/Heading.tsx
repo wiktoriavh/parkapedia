@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { createElement } from 'react';
 import { createUseStyles } from 'react-jss';
 
@@ -19,7 +19,7 @@ type HeadingProps = {
   variant?: ComponentVariantTypes;
   component: ComponentVariantTypes;
   children: ReactNode;
-};
+} & HTMLAttributes<HTMLElement>;
 
 const useStyles = createUseStyles({
   heading: {
@@ -43,7 +43,12 @@ const useStyles = createUseStyles({
   },
 });
 
-export function Heading({ variant, component, children }: HeadingProps): JSX.Element {
+export function Heading({
+  variant,
+  component,
+  children,
+  ...other
+}: HeadingProps): JSX.Element {
   const classes = useStyles();
 
   let variantType = '';
@@ -80,7 +85,8 @@ export function Heading({ variant, component, children }: HeadingProps): JSX.Ele
     {
       className: clsx(
         classes.heading,
-        headingStyle[variantType ? variantType : componentType]
+        headingStyle[variantType ? variantType : componentType],
+        other.className
       ),
     },
     [HeadingLink, children]
