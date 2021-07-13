@@ -8,7 +8,7 @@ import { MenuListItem } from '../typography/MenuListItem';
 
 const useStyles = createUseStyles({
   topNavigation: {
-    backgroundColor: 'salmon',
+    backgroundColor: 'inherit',
     height: 60,
   },
   topNavigationList: {
@@ -36,7 +36,9 @@ export function TopNavbar(): JSX.Element {
       <ul className={classes.topNavigationList}>
         {topNavigations.map((navigation, index) => {
           return (
-                <MenuListItem href={navigation.href} key={`${index}-${navigation.name}`}>{t(navigation.name)}</MenuListItem>
+            <MenuListItem href={navigation.href} key={`${index}-${navigation.name}`}>
+              {t(navigation.name)}
+            </MenuListItem>
           );
         })}
       </ul>
