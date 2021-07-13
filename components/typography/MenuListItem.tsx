@@ -10,7 +10,7 @@ const useStyles = createUseStyles<string, unknown, { [key: string]: string }>(
       lineHeight: 1.3,
       fontWeight: 600,
       textTransform: 'uppercase',
-      color: 'inherit',
+      color: 'black',
     },
     menuHref: {
       textDecoration: 'none',
