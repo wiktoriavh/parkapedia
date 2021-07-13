@@ -1,4 +1,5 @@
 import { createUseStyles } from 'react-jss';
+
 import { SvgIcon } from './SvgIcon';
 import type { SvgIconProps } from './SvgIcon';
 

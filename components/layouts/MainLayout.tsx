@@ -1,12 +1,12 @@
-import { TopNavbar } from './TopNavbar';
-import { Footer } from './Footer';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
+
+import { Footer } from './Footer';
+import { TopNavbar } from './TopNavbar';
 
 const useStyles = createUseStyles({
   mainContent: {
     minHeight: 'calc(100vh - 30px - 60px)',
-    border: '1px solid transparent',
   },
 });
 

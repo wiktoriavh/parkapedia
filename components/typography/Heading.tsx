@@ -5,20 +5,15 @@ import { createUseStyles } from 'react-jss';
 
 import { DinoFootprintIcon } from '../SvgIcons/DinoFootprint';
 
-
-type ComponentVariantTypes =
-  | 'h1'
-  | 1
-  | 'h2'
-  | 2
-  // | 'h3'
-  // | 3
-  // | 'h4'
-  // | 4
-  // | 'h5'
-  // | 5
-  // | 'h6'
-  // | 6;
+type ComponentVariantTypes = 'h1' | 1 | 'h2' | 2;
+// | 'h3'
+// | 3
+// | 'h4'
+// | 4
+// | 'h5'
+// | 5
+// | 'h6'
+// | 6;
 
 type HeadingProps = {
   variant?: ComponentVariantTypes;
@@ -51,12 +46,19 @@ const useStyles = createUseStyles({
 export function Heading({ variant, component, children }: HeadingProps): JSX.Element {
   const classes = useStyles();
 
+  let variantType = '';
+  let componentType = '';
+
   if (typeof variant === 'number') {
-    variant = `h${variant}`;
+    variantType = `h${variant}`;
+  } else if (variant) {
+    variantType = variant;
   }
 
   if (typeof component === 'number') {
-    component = `h${component}`;
+    componentType = `h${component}`;
+  } else {
+    componentType = component;
   }
 
   const headingStyle: { [key: string]: string } = {
@@ -74,8 +76,13 @@ export function Heading({ variant, component, children }: HeadingProps): JSX.Ele
   );
 
   return createElement(
-    component,
-    { className: clsx(classes.heading, headingStyle[variant ? variant : component]) },
+    componentType,
+    {
+      className: clsx(
+        classes.heading,
+        headingStyle[variantType ? variantType : componentType]
+      ),
+    },
     [HeadingLink, children]
   );
 }

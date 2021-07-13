@@ -1,7 +1,8 @@
-import { createUseStyles } from 'react-jss';
-import { Text } from '../typography/Text';
 import Link from 'next/Link';
 import { useTranslation } from 'react-i18next';
+import { createUseStyles } from 'react-jss';
+
+import { Text } from '../typography/Text';
 
 const useStyles = createUseStyles({
   footer: {

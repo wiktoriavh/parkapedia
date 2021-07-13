@@ -34,9 +34,9 @@ export function TopNavbar(): JSX.Element {
   return (
     <nav className={classes.topNavigation}>
       <ul className={classes.topNavigationList}>
-        {topNavigations.map((navigation, index) => {
+        {topNavigations.map((navigation) => {
           return (
-            <MenuListItem href={navigation.href} key={`${index}-${navigation.name}`}>
+            <MenuListItem href={navigation.href} key={`${navigation.name}`}>
               {t(navigation.name)}
             </MenuListItem>
           );

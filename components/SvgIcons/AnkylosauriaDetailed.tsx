@@ -1,6 +1,7 @@
+import { createUseStyles } from 'react-jss';
+
 import { SvgIcon } from './SvgIcon';
 import type { SvgIconProps } from './SvgIcon';
-import { createUseStyles } from 'react-jss';
 
 const useStyle = createUseStyles({
   body: {

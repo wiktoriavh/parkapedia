@@ -10,14 +10,14 @@ export type TextRef = HTMLElement;
 
 export const Text = forwardRef<TextRef, TextProps>(
   ({ children, component, ...other }, ref): JSX.Element => {
+    let componentType = '';
+
     if (typeof component === 'number') {
-      component = `h${component}`;
+      componentType = `h${component}`;
+    } else {
+      componentType = component;
     }
 
-    return createElement(component, { ref, ...other }, children);
+    return createElement(componentType, { ref, ...other }, children);
   }
 );
-
-Text.defaultProps = {
-  component: 'span',
-};

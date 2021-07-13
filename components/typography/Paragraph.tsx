@@ -11,7 +11,7 @@ const useStyles = createUseStyles({
   },
 });
 
-export function Paragraph({ children }: { children: ReactNode }) {
+export function Paragraph({ children }: { children: ReactNode }): JSX.Element {
   const classes = useStyles();
 
   return <p className={classes.paragraph}>{children}</p>;

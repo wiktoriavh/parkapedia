@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
-import { createUseStyles } from 'react-jss';
-import { Text } from './Text';
 import Link from 'next/Link';
+import type { ReactNode } from 'react';
+import { createUseStyles } from 'react-jss';
+
+import { Text } from './Text';
 
 const useStyles = createUseStyles<string, unknown, { [key: string]: string }>(
   (theme) => ({
