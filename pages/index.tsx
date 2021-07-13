@@ -2,12 +2,14 @@ import type { UserConfig } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { HeadingSection } from '../components/layouts/HeadingSection';
+import { Button } from '../components/styled/Button';
 import type { Locale } from '../utils/i18nextTypes';
 
 export default function Home(): JSX.Element {
   return (
     <div>
-      <HeadingSection title="I am a Heading" />
+      <HeadingSection title="I am a Heading, yo" />
+      <Button>I am a Button</Button>
     </div>
   );
 }
