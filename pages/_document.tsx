@@ -1,11 +1,13 @@
+import type {
+  DocumentContext} from 'next/document';
 import NextDocument, {
-  DocumentContext,
   Html,
   Head,
   Main,
   NextScript,
 } from 'next/document';
 import { SheetsRegistry, JssProvider, createGenerateId } from 'react-jss';
+
 import { creme } from '../utils/colors';
 
 export default function ParkasaurusDocument(): JSX.Element {
