@@ -5,12 +5,14 @@ import type { AppProps } from 'next/app';
 import { TopNavbar } from '../components/layouts/TopNavbar';
 import { ThemeProvider } from 'react-jss';
 import { parkasaurusTheme } from '../utils/colors';
+import { MainLayout } from '../components/layouts/MainLayout';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={parkasaurusTheme}>
-      <TopNavbar />
-      <Component {...pageProps} />
+      <MainLayout>
+        <Component {...pageProps} />
+      </MainLayout>
     </ThemeProvider>
   );
 }
