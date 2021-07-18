@@ -21,26 +21,28 @@ const useStyles = createUseStyles<
     fontSize: 20,
     letterSpacing: 1,
   },
-  keyValueContainer: {
+  labelValueContainer: {
     margin: '16px 0',
+    display: 'flex',
+    flexDirection: 'row',
   },
 }));
 
-type KeyValuePairProps = {
+type LabelValuePairProps = {
   label: string;
   value: string | number;
   typeColor: 'blue' | 'yellow';
 };
 
-export function KeyValuePair({
+export function LabelValuePair({
   label,
   value,
   typeColor,
-}: KeyValuePairProps): JSX.Element {
+}: LabelValuePairProps): JSX.Element {
   const classes = useStyles({ typeColor });
 
   return (
-    <div className={classes.keyValueContainer}>
+    <div className={classes.labelValueContainer}>
       <Text component="span" className={classes.label}>
         {label}
       </Text>
