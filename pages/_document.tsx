@@ -1,23 +1,29 @@
-import type {
-  DocumentContext} from 'next/document';
-import NextDocument, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-} from 'next/document';
+import type { DocumentContext, DocumentProps } from 'next/document';
+import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
 import { SheetsRegistry, JssProvider, createGenerateId } from 'react-jss';
+
+import jss from 'jss';
+import jssGlobal from 'jss-plugin-global';
+import jssCamelCase from 'jss-plugin-camel-case';
+import jssVendorPrefix from 'jss-plugin-vendor-prefixer';
+import normalize from 'normalize-jss';
 
 import { creme } from '../utils/colors';
 
-export default function ParkasaurusDocument(): JSX.Element {
+jss.setup({
+  plugins: [jssGlobal(), jssCamelCase(), jssVendorPrefix()],
+});
+const normalizeJss = jss.createStyleSheet(normalize, { link: true });
+
+export default function ParkasaurusDocument(props: DocumentProps): JSX.Element {
   return (
     <Html>
       <Head>
         <link rel="stylesheet" href="https://use.typekit.net/zao8law.css" />
-        <meta content="Wiktoria Mielcarek" name="authro" />
+        <meta content="Wiktoria Mielcarek" name="author" />
+        {props.styles}
       </Head>
-      <body style={{backgroundColor: creme}}>
+      <body style={{ backgroundColor: creme }}>
         <Main />
         <NextScript />
       </body>
@@ -26,7 +32,7 @@ export default function ParkasaurusDocument(): JSX.Element {
 }
 
 async function getInitialProps(ctx: DocumentContext) {
-  const registry = new SheetsRegistry();
+  const sheets = new SheetsRegistry();
   const generateId = createGenerateId();
   const originalRenderPage = ctx.renderPage;
 
@@ -34,7 +40,7 @@ async function getInitialProps(ctx: DocumentContext) {
     originalRenderPage({
       enhanceApp: (App) => (props) =>
         (
-          <JssProvider registry={registry} generateId={generateId}>
+          <JssProvider registry={sheets} generateId={generateId}>
             <App {...props} />
           </JssProvider>
         ),
@@ -42,15 +48,19 @@ async function getInitialProps(ctx: DocumentContext) {
 
   const initialProps = await NextDocument.getInitialProps(ctx);
 
-  const styles = (
-    <style type="text/css" data-meta="jss-ssr" id="server-side-rendering">
-      {registry.toString()}
-    </style>
-  );
-
   return {
     ...initialProps,
-    styles,
+    styles: (
+      <>
+        {initialProps.styles}
+        <style type="text/css" data-meta="jss-ssr" id="server-side-rendering">
+          {sheets.toString()}
+        </style>
+        <style type="text/css" data-meta="normalize" id="normalize-jss">
+          {normalizeJss.toString()}
+        </style>
+      </>
+    ),
   };
 }
 
