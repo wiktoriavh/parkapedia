@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import type { HTMLAttributes, ReactNode } from 'react';
-import { createElement } from 'react';
+import { forwardRef, HTMLAttributes, ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
 
 import { DinoFootprintIcon } from '../SvgIcons/DinoFootprint';
@@ -19,21 +18,21 @@ type HeadingProps = {
   variant?: ComponentVariantTypes;
   component: ComponentVariantTypes;
   children: ReactNode;
-} & HTMLAttributes<HTMLElement>;
+} & HTMLAttributes<HTMLHeadingElement>;
 
-const useStyles = createUseStyles({
+const useStyles = createUseStyles<string, { [key: string]: string }, unknown>({
   heading: {
     fontFamily: 'Poppins',
     '&:hover $headingLink': {
       opacity: 1,
     },
   },
-  headingOne: {
+  h1: {
     fontWeight: 800,
     fontSize: 26,
     textTransform: 'uppercase',
   },
-  headingTwo: {
+  h2: {
     fontWeight: 600,
     fontSize: 26,
     letterSpacing: 1.3,
@@ -43,52 +42,28 @@ const useStyles = createUseStyles({
   },
 });
 
-export function Heading({
-  variant,
-  component,
-  children,
-  ...other
-}: HeadingProps): JSX.Element {
+export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {
+  const { variant, component, children, ...other } = props;
   const classes = useStyles();
 
-  let variantType = '';
-  let componentType = '';
+  const Component: keyof JSX.IntrinsicElements = typeof component === 'number' ? `h${component}` : component;
+  const variantType = typeof variant === 'number' ? `h${variant}` : variant;
 
-  if (typeof variant === 'number') {
-    variantType = `h${variant}`;
-  } else if (variant) {
-    variantType = variant;
-  }
-
-  if (typeof component === 'number') {
-    componentType = `h${component}`;
-  } else {
-    componentType = component;
-  }
-
-  const headingStyle: { [key: string]: string } = {
-    h1: classes.headingOne,
-    h2: classes.headingTwo,
-  };
-
-  const HeadingLink = createElement(
-    'a',
-    {
-      href: `#${typeof children === 'string' && children.replace(/\s/gu, '-')}`,
-      className: classes.headingLink,
-    },
-    <DinoFootprintIcon />
+  const classNames = clsx(
+    classes.heading,
+    classes[variantType ? variantType : Component],
+    other.className
   );
 
-  return createElement(
-    componentType,
-    {
-      className: clsx(
-        classes.heading,
-        headingStyle[variantType ? variantType : componentType],
-        other.className
-      ),
-    },
-    [HeadingLink, children]
+  return (
+    <Component className={classNames} ref={ref} {...other}>
+      <a
+        href={`#${typeof children === 'string' ? children.replace(/\s/gu, '-') : '-'}`}
+        className={classes.headingLink}
+      >
+        <DinoFootprintIcon />
+      </a>
+      {children}
+    </Component>
   );
-}
+});
