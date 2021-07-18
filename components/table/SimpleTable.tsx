@@ -16,9 +16,9 @@ export function SimpleTable({ data }: SimpleTableProps): JSX.Element {
       <TableBody>
         {data.map((row) => {
           return (
-            <TableRow>
+            <TableRow key={row[0]}>
               {row.map((cell) => {
-                return <TableData>{cell}</TableData>;
+                return <TableData key={cell}>{cell}</TableData>;
               })}
             </TableRow>
           );
