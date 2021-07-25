@@ -1,12 +1,12 @@
-import type { DocumentContext, DocumentProps } from 'next/document';
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
-import { SheetsRegistry, JssProvider, createGenerateId } from 'react-jss';
 
 import jss from 'jss';
-import jssGlobal from 'jss-plugin-global';
 import jssCamelCase from 'jss-plugin-camel-case';
+import jssGlobal from 'jss-plugin-global';
 import jssVendorPrefix from 'jss-plugin-vendor-prefixer';
+import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
+import type { DocumentContext, DocumentProps } from 'next/document';
 import normalize from 'normalize-jss';
+import { SheetsRegistry, JssProvider, createGenerateId } from 'react-jss';
 
 import { creme } from '../utils/colors';
 
