@@ -1,4 +1,4 @@
-import { createUseStyles, ThemeProvider } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 
 import { Heading } from '../typography/Heading';
 import { Box } from './Box';
