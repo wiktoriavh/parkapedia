@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles<string, unknown, { [key: string]: string }>(
@@ -33,7 +33,7 @@ export function Button({ children, className, ...other }: ButtonProps): JSX.Elem
   const classes = useStyles();
 
   return (
-    <button className={clsx(classes.button, className)} {...other}>
+    <button type="button" className={clsx(classes.button, className)} {...other}>
       {children}
     </button>
   );
