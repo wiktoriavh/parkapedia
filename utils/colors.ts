@@ -1,3 +1,5 @@
+import type { DefaultTheme } from 'react-jss';
+
 export const blue = '#1CBFE0';
 export const creme = '#f8f0e3';
 export const brown = '#5d5b58';
@@ -7,22 +9,27 @@ export const magenta = '#ff4975';
 export const white = '#000000';
 export const yellow = '#ffca0c';
 
-export const parkasaurusTheme = {
-  blue: '#1CBFE0',
-  creme: '#f8f0e3',
-  brown: '#5d5b58',
-  purple: '#4b11af',
-  green: '#8dc640',
-  magenta: '#ff4975',
-  white: '#000000',
-  yellow: '#ffca0c',
-  savannah: "#e95816",
-  prairie: "#f39c16",
-  desert: "#ffe00d",
-  taiga: "#26AE60",
-  forest: "#8DC640",
-  rainforest: "#008790",
-  swamp: "#2275A9",
-  alpine: "#00BE95",
-  tundra: "#63D4F9"
+export const parkasaurusTheme: DefaultTheme = {
+  palette: {
+    black: '#000',
+    blue: '#1CBFE0',
+    creme: '#f8f0e3',
+    brown: '#5d5b58',
+    purple: '#4b11af',
+    green: '#8dc640',
+    magenta: '#ff4975',
+    white: '#000000',
+    yellow: '#ffca0c',
+    biomes: {
+      savannah: '#e95816',
+      prairie: '#f39c16',
+      desert: '#ffe00d',
+      taiga: '#26AE60',
+      forest: '#8DC640',
+      rainforest: '#008790',
+      swamp: '#2275A9',
+      alpine: '#00BE95',
+      tundra: '#63D4F9',
+    },
+  },
 };
