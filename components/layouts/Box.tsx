@@ -1,16 +1,18 @@
 import clsx from 'clsx';
-import { forwardRef, HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { forwardRef } from 'react';
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles<
-  string,
-  { [key: string]: number | true | undefined },
-  { [key: string]: string }
->({
-  box: {
-    margin: (props) => (props.fullWidth ? 0 : '0 20px'),
-    width: (props) => `calc((100vw / 12) * ${props.col})`,
-  },
+type Theme = { [key: string]: string };
+
+const useStyles = createUseStyles<string, Partial<BoxProps>, Theme>((theme) => {
+  return {
+    box: {
+      margin: (props) => (props.fullWidth ? 0 : '0 20px'),
+      width: (props) =>
+        typeof props.col === 'number' && `calc((100vw / 12) * ${props.col})`,
+    },
+  };
 });
 
 type BoxProps = {
