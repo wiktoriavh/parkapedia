@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import { forwardRef, HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { forwardRef } from 'react';
 import { createUseStyles } from 'react-jss';
 
 import { DinoFootprintIcon } from '../SvgIcons/DinoFootprint';
@@ -46,7 +47,8 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref)
   const { variant, component, children, ...other } = props;
   const classes = useStyles();
 
-  const Component: keyof JSX.IntrinsicElements = typeof component === 'number' ? `h${component}` : component;
+  const Component: keyof JSX.IntrinsicElements =
+    typeof component === 'number' ? `h${component}` : component;
   const variantType = typeof variant === 'number' ? `h${variant}` : variant;
 
   const classNames = clsx(
@@ -58,7 +60,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref)
   return (
     <Component className={classNames} ref={ref} {...other}>
       <a
-        href={`#${typeof children === 'string' ? children.replace(/\s/gu, '-') : '-'}`}
+        href={`#${typeof children === 'string' ? children.replace(/\s/gu, '-') : ''}`}
         className={classes.headingLink}
       >
         <DinoFootprintIcon />
