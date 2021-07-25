@@ -25,14 +25,10 @@ export function Footer(): JSX.Element {
   return (
     <footer className={classes.footer}>
       <Link href="/impressum" passHref>
-        <Text component="a" className={classes.footerItem}>
-          Impressum, aber in Englisch NICHT VERGESSEN
-        </Text>
+        <a className={classes.footerItem}>Impressum, aber in Englisch NICHT VERGESSEN</a>
       </Link>
       <Link href="/datenschutz" passHref>
-        <Text component="a" className={classes.footerItem}>
-          {t('privacyPolicy')}
-        </Text>
+        <a className={classes.footerItem}>{t('privacyPolicy')}</a>
       </Link>
     </footer>
   );
