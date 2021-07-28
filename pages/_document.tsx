@@ -1,5 +1,4 @@
-
-import jss from 'jss';
+import { create } from 'jss';
 import jssCamelCase from 'jss-plugin-camel-case';
 import jssGlobal from 'jss-plugin-global';
 import jssVendorPrefix from 'jss-plugin-vendor-prefixer';
@@ -10,9 +9,12 @@ import { SheetsRegistry, JssProvider, createGenerateId } from 'react-jss';
 
 import { creme } from '../utils/colors';
 
-jss.setup({
-  plugins: [jssGlobal(), jssCamelCase(), jssVendorPrefix()],
-});
+const jss = create();
+
+jss.use(jssGlobal());
+jss.use(jssCamelCase());
+jss.use(jssVendorPrefix());
+
 const normalizeJss = jss.createStyleSheet(normalize, { link: true });
 
 export default function ParkasaurusDocument(props: DocumentProps): JSX.Element {
