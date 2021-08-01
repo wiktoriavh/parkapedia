@@ -1,0 +1,24 @@
+{
+  "name": "Oviraptor",
+  "class": "Theropoda",
+  "typeSpecies": "Oviraptor philoceratops",
+  "tiles": "grass",
+  "biome": "taiga",
+  "size": "small",
+  "exhibitSize": 350,
+  "eggItems": {
+    "Theropoda Footprint": 6,
+    "Theropoda Skull": 6,
+    "Epic Gem": 1
+  },
+  "food": "meat",
+  "tier": 3,
+  "herd": false,
+  "appeal": 450,
+  "damage": 20,
+  "scariness": 200,
+  "length": 1.5,
+  "height": 0.9,
+  "weight": 36,
+  "period": "Late Cretaceous"
+}
