@@ -39,7 +39,7 @@ export function HeadingSection({ title }: HeadingSectionProps): JSX.Element {
   return (
     <Box fullWidth col={12} className={classes.headingSection}>
       <Box col={6} className={classes.headingSectionTextContainer}>
-        <Heading className={classes.headingSectionText} component="h1">
+        <Heading className={classes.headingSectionText} component="h1" disablelink>
           {title}
         </Heading>
       </Box>

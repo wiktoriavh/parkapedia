@@ -19,6 +19,7 @@ type HeadingProps = {
   variant?: ComponentVariantTypes;
   component: ComponentVariantTypes;
   children: ReactNode;
+  disablelink?: true | undefined;
 } & HTMLAttributes<HTMLHeadingElement>;
 
 const useStyles = createUseStyles<string, { [key: string]: string }, unknown>({
@@ -44,7 +45,7 @@ const useStyles = createUseStyles<string, { [key: string]: string }, unknown>({
 });
 
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref) => {
-  const { variant, component, children, ...other } = props;
+  const { variant, component, children, disablelink, ...other } = props;
   const classes = useStyles();
 
   const Component: keyof JSX.IntrinsicElements =
@@ -59,12 +60,12 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref)
 
   return (
     <Component className={classNames} ref={ref} {...other}>
-      <a
+      {!disablelink && <a
         href={`#${typeof children === 'string' ? children.replace(/\s/gu, '-') : ''}`}
         className={classes.headingLink}
       >
         <DinoFootprintIcon />
-      </a>
+      </a>}
       {children}
     </Component>
   );
