@@ -35,5 +35,5 @@ export type EggItems = {
 export type Exhibit = {
   tiles: string;
   biome: string;
-  exhibitSize: number;
+  exhibit_size: number;
 };

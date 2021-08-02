@@ -17,7 +17,7 @@
   "exhibit": {
     "tiles": "grass",
     "biome": "taiga",
-    "exhibitSize": 350
+    "exhibit_size": 350
   },
   "egg_items": {
     "theropoda_footprint": 6,
