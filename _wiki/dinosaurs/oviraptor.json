@@ -1,24 +1,31 @@
 {
-  "name": "Oviraptor",
-  "class": "Theropoda",
-  "typeSpecies": "Oviraptor philoceratops",
-  "tiles": "grass",
-  "biome": "taiga",
-  "size": "small",
-  "exhibitSize": 350,
-  "eggItems": {
-    "Theropoda Footprint": 6,
-    "Theropoda Skull": 6,
-    "Epic Gem": 1
+  "name": "oviraptor",
+  "class": "theropoda",
+  "image": "/images/oviraptor.png",
+  "dino_information": {
+    "type_species": "oviraptor_philoceratops",
+    "length": 1.5,
+    "weight": 36,
+    "height": 0.9,
+    "period": "late_cretaceous"
   },
+  "affect": {
+    "appeal": 450,
+    "scariness": 200,
+    "damage": 20
+  },
+  "exhibit": {
+    "tiles": "grass",
+    "biome": "taiga",
+    "exhibitSize": 350
+  },
+  "egg_items": {
+    "theropoda_footprint": 6,
+    "theropoda_skull": 6,
+    "epic_gem": 1
+  },
+  "size": "small",
   "food": "meat",
   "tier": 3,
-  "herd": false,
-  "appeal": 450,
-  "damage": 20,
-  "scariness": 200,
-  "length": 1.5,
-  "height": 0.9,
-  "weight": 36,
-  "period": "Late Cretaceous"
+  "herd": false
 }
