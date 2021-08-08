@@ -33,7 +33,20 @@ export type EggItems = {
 };
 
 export type Exhibit = {
-  tiles: string;
-  biome: string;
   exhibit_size: number;
+} & (GrassBiome | SwampBiome | SandBiome);
+
+export type GrassBiome = {
+  tiles: 'grass';
+  biome: 'taiga' | 'forest' | 'rainforest';
+};
+
+export type SwampBiome = {
+  tiles: 'swamp';
+  biome: 'swamp' | 'tundra' | 'alpine';
+};
+
+export type SandBiome = {
+  tiles: 'sand';
+  biome: 'prairie' | 'savannah' | 'desert';
 };
