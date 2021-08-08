@@ -1,4 +1,4 @@
-export type Welcome = {
+export type DinosaurType = {
   name: string;
   class: string;
   image: string;
