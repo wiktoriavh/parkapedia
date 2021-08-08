@@ -1,33 +1,31 @@
-import { createUseStyles } from 'react-jss';
+import { createUseStyles, DefaultTheme } from 'react-jss';
 
 import { Heading } from '../typography/Heading';
 import { Box } from './Box';
 
-const useStyles = createUseStyles<string, unknown, { [key: string]: string }>(
-  (theme) => ({
-    headingSection: {
-      backgroundColor: theme.magenta,
-      height: 140,
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    headingSectionTextContainer: {
-      height: 50,
-      backgroundColor: 'white',
-      borderRadius: 5,
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    headingSectionText: {
-      margin: 0,
-      textAlign: 'center',
-    },
-  })
-);
+const useStyles = createUseStyles<string, unknown, DefaultTheme>((theme) => ({
+  headingSection: {
+    backgroundColor: theme.palette.magenta,
+    height: 140,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headingSectionTextContainer: {
+    height: 50,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headingSectionText: {
+    margin: 0,
+    textAlign: 'center',
+  },
+}));
 
 type HeadingSectionProps = {
   title: string;
