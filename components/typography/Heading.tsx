@@ -60,12 +60,14 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>((props, ref)
 
   return (
     <Component className={classNames} ref={ref} {...other}>
-      {!disablelink && <a
-        href={`#${typeof children === 'string' ? children.replace(/\s/gu, '-') : ''}`}
-        className={classes.headingLink}
-      >
-        <DinoFootprintIcon />
-      </a>}
+      {!disablelink && (
+        <a
+          href={`#${typeof children === 'string' ? children.replace(/\s/gu, '-') : ''}`}
+          className={classes.headingLink}
+        >
+          <DinoFootprintIcon />
+        </a>
+      )}
       {children}
     </Component>
   );
