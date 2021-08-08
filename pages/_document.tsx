@@ -7,7 +7,7 @@ import type { DocumentContext, DocumentProps } from 'next/document';
 import normalize from 'normalize-jss';
 import { SheetsRegistry, JssProvider, createGenerateId } from 'react-jss';
 
-import { creme } from '../utils/colors';
+import { creme } from '../utils/theme';
 
 const jss = create();
 

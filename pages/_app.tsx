@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'react-jss';
 
 import { MainLayout } from '../components/layouts/MainLayout';
-import { parkasaurusTheme } from '../utils/colors';
+import { parkasaurusTheme } from '../utils/theme';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
