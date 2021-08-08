@@ -32,4 +32,7 @@ export const parkasaurusTheme: DefaultTheme = {
       tundra: '#63D4F9',
     },
   },
+  spacing: {
+    normal: 20,
+  },
 };
