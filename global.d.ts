@@ -23,6 +23,9 @@ declare global {
           tundra: HexColor;
         };
       };
+      spacing: {
+        normal: number;
+      };
     }
   }
 }
