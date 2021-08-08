@@ -2,14 +2,17 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { createUseStyles } from 'react-jss';
 import type { DefaultTheme } from 'react-jss';
+import { SandBiome, GrassBiome, SwampBiome } from '../../lib/DinosaurType';
 
 import { Text } from '../typography/Text';
 
-const useStyles = createUseStyles<string, Pick<BiomeGraphProps, 'biome'>, DefaultTheme>(
+const useStyles = createUseStyles<string, Pick<BiomeGraphProps, 'tiles'>, DefaultTheme>(
   (theme) => ({
     graph: {
       position: 'relative',
       paddingLeft: 20,
+      marginBottom: '2rem',
+      marginTop: '2rem',
     },
     biomeGraph: {
       display: 'grid',
@@ -17,16 +20,16 @@ const useStyles = createUseStyles<string, Pick<BiomeGraphProps, 'biome'>, Defaul
       gridTemplateRows: '1fr 1fr',
       gap: 0,
       border: '5px solid white',
-      height: 200,
+      height: 480,
     },
     grassBiome: {
-      gridTemplateAreas: (props) => getBiomeAreas(props.biome),
+      gridTemplateAreas: (props) => getBiomeAreas(props.tiles),
     },
     swampBione: {
-      gridTemplateAreas: (props) => getBiomeAreas(props.biome),
+      gridTemplateAreas: (props) => getBiomeAreas(props.tiles),
     },
     sandBiome: {
-      gridTemplateAreas: (props) => getBiomeAreas(props.biome),
+      gridTemplateAreas: (props) => getBiomeAreas(props.tiles),
     },
     biomeArea: {
       border: '5px solid white',
@@ -100,26 +103,10 @@ const useStyles = createUseStyles<string, Pick<BiomeGraphProps, 'biome'>, Defaul
       fontSize: '1.5rem',
       left: '50%',
       transform: 'translateX(-50%)',
+      // marginBottom: '2rem',
     },
   })
 );
-
-type GrassBiome = {
-  biome: 'grass';
-  type: 'taiga' | 'forest' | 'rainforest';
-};
-
-type SwampBiome = {
-  biome: 'swamp';
-  type: 'swamp' | 'tundra' | 'alpine';
-};
-
-type SandBiome = {
-  biome: 'sand';
-  type: 'prairie' | 'savannah' | 'desert';
-};
-
-type BiomeGraphProps = GrassBiome | SwampBiome | SandBiome;
 
 const firstArea = {
   grass: 'taiga',
@@ -139,85 +126,87 @@ const thirdArea = {
   swamp: 'tundra',
 };
 
-export function BiomeGraph({ biome, type }: BiomeGraphProps): JSX.Element {
-  const classes = useStyles({ biome });
+type BiomeGraphProps = GrassBiome | SwampBiome | SandBiome;
+
+export function BiomeGraph({ biome, tiles }: BiomeGraphProps): JSX.Element {
+  const classes = useStyles({ tiles });
   const { t } = useTranslation('biomes');
 
   return (
     <div className={classes.graph}>
       <div
-        aria-label={t(biome)}
+        aria-label={t(tiles)}
         tabIndex={0}
         className={clsx(classes.biomeGraph, {
-          [classes.grassBiome]: biome === 'grass',
-          [classes.swampBione]: biome === 'swamp',
-          [classes.sandBiome]: biome === 'sand',
+          [classes.grassBiome]: tiles === 'grass',
+          [classes.swampBione]: tiles === 'swamp',
+          [classes.sandBiome]: tiles === 'sand',
         })}
       >
         <div
           aria-label={
-            type === firstArea[biome]
-              ? t('{{type}}_is_selected', { type: firstArea[biome] })
-              : t(firstArea[biome])
+            biome === firstArea[tiles]
+              ? t('{{type}}_is_selected', { type: firstArea[tiles] })
+              : t(firstArea[tiles])
           }
           tabIndex={0}
           className={clsx(classes.biomeArea, {
-            [classes.taiga]: biome === 'grass',
-            [classes.desert]: biome === 'sand',
-            [classes.tundra]: biome === 'swamp',
+            [classes.taiga]: tiles === 'grass',
+            [classes.desert]: tiles === 'sand',
+            [classes.tundra]: tiles === 'swamp',
           })}
         >
           <Text
             component="span"
             className={clsx(classes.text, {
-              [classes.selected]: type === firstArea[biome],
+              [classes.selected]: biome === firstArea[tiles],
             })}
           >
-            {t(firstArea[biome])}
+            {t(firstArea[tiles])}
           </Text>
         </div>
         <div
           aria-label={
-            type === secondArea[biome]
-              ? t('{{type}}_is_selected', { type: secondArea[biome] })
-              : t(secondArea[biome])
+            biome === secondArea[tiles]
+              ? t('{{type}}_is_selected', { type: secondArea[tiles] })
+              : t(secondArea[tiles])
           }
           tabIndex={0}
           className={clsx(classes.biomeArea, {
-            [classes.forest]: biome === 'grass',
-            [classes.prairie]: biome === 'sand',
-            [classes.alpine]: biome === 'swamp',
+            [classes.forest]: tiles === 'grass',
+            [classes.prairie]: tiles === 'sand',
+            [classes.alpine]: tiles === 'swamp',
           })}
         >
           <Text
             component="span"
             className={clsx(classes.text, {
-              [classes.selected]: type === secondArea[biome],
+              [classes.selected]: biome === secondArea[tiles],
             })}
           >
-            {t(secondArea[biome])}
+            {t(secondArea[tiles])}
           </Text>
         </div>
         <div
           aria-label={
-            type === thirdArea[biome]
-              ? t('{{type}}_is_selected', { type: thirdArea[biome] })
-              : t(thirdArea[biome])
+            biome === thirdArea[tiles]
+              ? t('{{type}}_is_selected', { type: thirdArea[tiles] })
+              : t(thirdArea[tiles])
           }
           tabIndex={0}
           className={clsx(classes.biomeArea, {
-            [classes.rainforest]: biome === 'grass',
-            [classes.savannah]: biome === 'sand',
-            [classes.swamp]: biome === 'swamp',
+            [classes.rainforest]: tiles === 'grass',
+            [classes.savannah]: tiles === 'sand',
+            [classes.swamp]: tiles === 'swamp',
           })}
         >
           <Text
             component="span"
             className={clsx(classes.text, {
-              [classes.selected]: type === thirdArea[biome],
+              [classes.selected]: biome === thirdArea[tiles],
             })}
           >
-            {t(thirdArea[biome])}.
+            {t(thirdArea[tiles])}.
           </Text>
         </div>
       </div>
@@ -231,8 +220,8 @@ export function BiomeGraph({ biome, type }: BiomeGraphProps): JSX.Element {
   );
 }
 
-const getBiomeAreas = (biome: string): string | undefined => {
-  switch (biome) {
+const getBiomeAreas = (tiles: string): string | undefined => {
+  switch (tiles) {
     case 'grass':
       return '"taiga taiga" "forest rainforest"';
     case 'sand':
