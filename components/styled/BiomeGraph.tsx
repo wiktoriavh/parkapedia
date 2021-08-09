@@ -10,8 +10,8 @@ const useStyles = createUseStyles<string, Pick<BiomeGraphProps, 'tiles'>, Defaul
   (theme) => ({
     graph: {
       position: 'relative',
-      paddingLeft: 20,
-      marginBottom: '2rem',
+      paddingLeft: '3rem',
+      marginBottom: '3rem',
       marginTop: '2rem',
     },
     biomeGraph: {
@@ -103,7 +103,7 @@ const useStyles = createUseStyles<string, Pick<BiomeGraphProps, 'tiles'>, Defaul
       fontSize: '1.5rem',
       left: '50%',
       transform: 'translateX(-50%)',
-      // marginBottom: '2rem',
+      bottom: '-3rem',
     },
   })
 );
@@ -206,7 +206,7 @@ export function BiomeGraph({ biome, tiles }: BiomeGraphProps): JSX.Element {
               [classes.selected]: biome === thirdArea[tiles],
             })}
           >
-            {t(thirdArea[tiles])}.
+            {t(thirdArea[tiles])}
           </Text>
         </div>
       </div>
