@@ -18,7 +18,7 @@ export const parkasaurusTheme: DefaultTheme = {
     purple: '#4b11af',
     green: '#8dc640',
     magenta: '#ff4975',
-    white: '#000000',
+    white: '#ffffff',
     yellow: '#ffca0c',
     biomes: {
       savannah: '#e95816',
