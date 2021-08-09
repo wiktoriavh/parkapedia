@@ -20,9 +20,9 @@
     "exhibit_size": 350
   },
   "egg_items": {
-    "theropoda_footprint": 6,
-    "theropoda_skull": 6,
-    "epic_gem": 1
+    "footprint": 6,
+    "skull": 6,
+    "gem": 1
   },
   "size": "small",
   "food": "meat",
