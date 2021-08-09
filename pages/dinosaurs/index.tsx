@@ -7,7 +7,7 @@ export default function Dinosaurs(props: Record<string, string[]>): JSX.Element 
   return (
     <ul>
       {props.slugs.map((slug) => (
-        <li>
+        <li key={slug}>
           <Link href={`/dinosaurs/${slug}`}>
             <a>{slug}</a>
           </Link>
