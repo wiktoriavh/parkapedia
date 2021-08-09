@@ -5,7 +5,7 @@ export type DinosaurType = {
   dino_information: DinoInformation;
   affect: Affect;
   exhibit: Exhibit;
-  egg_items: EggItems;
+  egg_items: EggItemsType;
   size: string;
   food: string;
   tier: number;
@@ -26,10 +26,10 @@ export type DinoInformation = {
   period: string;
 };
 
-export type EggItems = {
-  theropoda_footprint: number;
-  theropoda_skull: number;
-  epic_gem: number;
+export type EggItemsType = {
+  footprint: number;
+  skull: number;
+  gem: number;
 };
 
 export type Exhibit = {
