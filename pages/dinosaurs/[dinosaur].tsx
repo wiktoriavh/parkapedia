@@ -4,12 +4,18 @@ import type { Locale } from '../../utils/i18nextTypes';
 import { HeadingSection } from '../../components/layouts/HeadingSection';
 import { useTranslation } from 'react-i18next';
 import { LabelValuePair } from '../../components/table/LabelValuePair';
-import { DinosaurType, DinoInformation, Affect } from '../../lib/DinosaurType';
+import {
+  DinosaurType,
+  DinoInformation,
+  Affect,
+  EggItemsType,
+} from '../../lib/DinosaurType';
 import { createUseStyles, DefaultTheme } from 'react-jss';
 import { Box } from '../../components/layouts/Box';
 import { BiomeGraph } from '../../components/styled/BiomeGraph';
 import clsx from 'clsx';
 import { Heading } from '../../components/typography/Heading';
+import { EggItems } from '../../components/dinosaurs/EggItems';
 
 const useStyles = createUseStyles<string, unknown, DefaultTheme>((theme) => ({
   dinoInfo: {
@@ -64,7 +70,9 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
   const {
     dino_information,
     affect,
-  }: { dino_information: DinoInformation; affect: Affect } = post;
+    egg_items,
+  }: { dino_information: DinoInformation; affect: Affect; egg_items: EggItemsType } =
+    post;
 
   const information = Object.entries(dino_information).map(([key, value]) => {
     return {
@@ -82,6 +90,18 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
     return {
       label: t(key),
       value: typeof value === 'string' ? t(value) : value,
+    };
+  });
+
+  const materials = Object.entries(egg_items).map(([type, value]) => {
+    let remains = `${post.class}_${type}`;
+    if (type === 'gem') {
+      remains = type;
+    }
+
+    return {
+      label: value > 1 ? t(`${remains}_plural`) : t(`${remains}`),
+      value: value,
     };
   });
 
@@ -109,6 +129,13 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
           <BiomeGraph biome={post.exhibit.biome} tiles={post.exhibit.tiles} />
         </Box>
       </section>
+      <section className={classes.section} style={{ padding: '80px 0' }}>
+        <Heading component={2} disablelink className={'a11y-hide'}>
+          {t('egg_items')}
+        </Heading>
+        <EggItems items={materials} />
+      </section>
+      <section className={classes.section}>section</section>
     </>
   );
 }
@@ -163,7 +190,7 @@ export async function getStaticProps({
       post: {
         ...post,
       },
-      ...(await serverSideTranslations(locale, ['common', 'dinosaurs'])),
+      ...(await serverSideTranslations(locale, ['common', 'dinosaurs', 'biomes'])),
     },
   };
 }
