@@ -1,23 +1,27 @@
+import clsx from 'clsx';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { getAllPosts, getPostBySlug } from '../../utils/routes';
-import type { Locale } from '../../utils/i18nextTypes';
-import { HeadingSection } from '../../components/layouts/HeadingSection';
 import { useTranslation } from 'react-i18next';
+import { createUseStyles, DefaultTheme } from 'react-jss';
+
+import { EggItems } from '../../components/dinosaurs/EggItems';
+import { Exhibit } from '../../components/exhibit/Exhibit';
+import { Box } from '../../components/layouts/Box';
+import { HeadingSection } from '../../components/layouts/HeadingSection';
+import { BiomeGraph } from '../../components/styled/BiomeGraph';
 import { LabelValuePair } from '../../components/table/LabelValuePair';
-import {
+import { Heading } from '../../components/typography/Heading';
+import type {
   DinosaurType,
   DinoInformation,
   Affect,
   EggItemsType,
 } from '../../lib/DinosaurType';
-import { createUseStyles, DefaultTheme } from 'react-jss';
-import { Box } from '../../components/layouts/Box';
-import { BiomeGraph } from '../../components/styled/BiomeGraph';
-import clsx from 'clsx';
-import { Heading } from '../../components/typography/Heading';
-import { EggItems } from '../../components/dinosaurs/EggItems';
+import type { Locale } from '../../utils/i18nextTypes';
+import { getAllPosts, getPostBySlug } from '../../utils/routes';
 
-const useStyles = createUseStyles<string, unknown, DefaultTheme>((theme) => ({
+
+const useStyles = createUseStyles((theme) => ({
   dinoInfo: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -101,17 +105,19 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
 
     return {
       label: value > 1 ? t(`${remains}_plural`) : t(`${remains}`),
-      value: value,
+      value,
     };
   });
 
+  const { image, name, exhibit } = post;
+
   return (
     <>
-      <HeadingSection title={typeof post.name === 'string' ? t(post.name) : post.name} />
+      <HeadingSection title={typeof name === 'string' ? t(name) : name} />
       <section className={classes.section}>
         <Box col={8} className={clsx(classes.dinoInfo)}>
           <figure className={classes.profilePicture}>
-            <img src={post.image} alt={`Image of ${post.name}`} />
+            <img src={image} alt={`Image of ${name}`} />
           </figure>
           <div>
             <LabelValues info={information} color="blue" />
@@ -126,16 +132,18 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
           Grass
         </Heading>
         <Box col={8}>
-          <BiomeGraph biome={post.exhibit.biome} tiles={post.exhibit.tiles} />
+          <BiomeGraph biome={exhibit.biome} tiles={exhibit.tiles} />
         </Box>
       </section>
       <section className={classes.section} style={{ padding: '80px 0' }}>
-        <Heading component={2} disablelink className={'a11y-hide'}>
+        <Heading component={2} disablelink className="a11y-hide">
           {t('egg_items')}
         </Heading>
         <EggItems items={materials} />
       </section>
-      <section className={classes.section}>section</section>
+      <section className={classes.section}>
+        <Exhibit size={exhibit.exhibit_size} />
+      </section>
     </>
   );
 }
@@ -157,7 +165,7 @@ const LabelValues: LabelValuesType = ({ info, color }) => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts('dinosaurs');
 
   return {
@@ -170,15 +178,15 @@ export async function getStaticPaths() {
     }),
     fallback: false,
   };
-}
+};
 
-export async function getStaticProps({
+export const getStaticProps: GetStaticProps = async ({
   params,
   locale,
 }: {
   params: Record<string, string>;
   locale: Locale;
-}) {
+}) => {
   const post = getPostBySlug(params.dinosaur, 'dinosaurs');
 
   if (!locale) {
@@ -193,4 +201,4 @@ export async function getStaticProps({
       ...(await serverSideTranslations(locale, ['common', 'dinosaurs', 'biomes'])),
     },
   };
-}
+};
