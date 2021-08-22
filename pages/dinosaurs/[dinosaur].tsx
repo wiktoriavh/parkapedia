@@ -5,21 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { createUseStyles, DefaultTheme } from 'react-jss';
 
 import { EggItems } from '../../components/dinosaurs/EggItems';
-import { Exhibit } from '../../components/exhibit/Exhibit';
 import { Box } from '../../components/layouts/Box';
 import { HeadingSection } from '../../components/layouts/HeadingSection';
 import { BiomeGraph } from '../../components/styled/BiomeGraph';
 import { LabelValuePair } from '../../components/table/LabelValuePair';
 import { Heading } from '../../components/typography/Heading';
+import { Text } from '../../components/typography/Text';
 import type {
   DinosaurType,
   DinoInformation,
   Affect,
   EggItemsType,
 } from '../../lib/DinosaurType';
-import type { Locale } from '../../utils/i18nextTypes';
 import { getAllPosts, getPostBySlug } from '../../utils/routes';
-
 
 const useStyles = createUseStyles((theme) => ({
   dinoInfo: {
@@ -64,6 +62,10 @@ const useStyles = createUseStyles((theme) => ({
     position: 'relative',
     padding: '50px',
     marginTop: 50,
+  },
+  exhibitSize: {
+    fontSize: '2rem',
+    textAlign: 'center',
   },
 }));
 
@@ -111,6 +113,8 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
 
   const { image, name, exhibit } = post;
 
+  console.log(post.class);
+
   return (
     <>
       <HeadingSection title={typeof name === 'string' ? t(name) : name} />
@@ -132,6 +136,9 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
           Grass
         </Heading>
         <Box col={8}>
+          <Text className={classes.exhibitSize} component="p">
+            {exhibit.exhibit_size} ft²
+          </Text>
           <BiomeGraph biome={exhibit.biome} tiles={exhibit.tiles} />
         </Box>
       </section>
@@ -140,9 +147,6 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
           {t('egg_items')}
         </Heading>
         <EggItems items={materials} />
-      </section>
-      <section className={classes.section}>
-        <Exhibit size={exhibit.exhibit_size} />
       </section>
     </>
   );
@@ -180,17 +184,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-  locale,
-}: {
-  params: Record<string, string>;
-  locale: Locale;
-}) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  if (typeof params?.dinosaur !== 'string' || !locale) {
+    return {
+      notFound: true,
+    };
+  }
+
   const post = getPostBySlug(params.dinosaur, 'dinosaurs');
 
-  if (!locale) {
-    throw new Error('locale is undefined.');
+  if (!post) {
+    return {
+      notFound: true,
+    };
   }
 
   return {
