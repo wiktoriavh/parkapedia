@@ -1,16 +1,24 @@
 export type DinosaurType = {
   name: string;
-  class: string;
+  class: DinoClasses;
   image: string;
   dino_information: DinoInformation;
   affect: Affect;
-  exhibit: Exhibit;
+  exhibit: GrassBiome | SwampBiome | SandBiome;
   egg_items: EggItemsType;
   size: string;
   food: string;
   tier: number;
   herd: boolean;
 };
+
+export type DinoClasses =
+  | 'ankylosauria'
+  | 'ceratopsia'
+  | 'ornithopoda'
+  | 'sauropoda'
+  | 'stegosauria'
+  | 'theropoda';
 
 export type Affect = {
   appeal: number;
@@ -32,21 +40,14 @@ export type EggItemsType = {
   gem: number;
 };
 
-export type Exhibit = {
+export type Exhibit<Tiles extends string, Biomes extends string> = {
   exhibit_size: number;
-} & (GrassBiome | SwampBiome | SandBiome);
+  tiles: Tiles;
+  biome: Biomes;
+}
 
-export type GrassBiome = {
-  tiles: 'grass';
-  biome: 'taiga' | 'forest' | 'rainforest';
-};
+export type GrassBiome = Exhibit<'grass', 'taiga' | 'forest' | 'rainforest'>;
 
-export type SwampBiome = {
-  tiles: 'swamp';
-  biome: 'swamp' | 'tundra' | 'alpine';
-};
+export type SwampBiome = Exhibit<'swamp', 'swamp' | 'tundra' | 'alpine'>;
 
-export type SandBiome = {
-  tiles: 'sand';
-  biome: 'prairie' | 'savannah' | 'desert';
-};
+export type SandBiome = Exhibit<'sand', 'prairie' | 'savannah' | 'desert'>;
