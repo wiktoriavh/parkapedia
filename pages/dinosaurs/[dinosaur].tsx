@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { createUseStyles, DefaultTheme } from 'react-jss';
 
 import { EggItems } from '../../components/dinosaurs/EggItems';
+import { Herd } from '../../components/dinosaurs/Herd';
 import { Box } from '../../components/layouts/Box';
 import { HeadingSection } from '../../components/layouts/HeadingSection';
 import { BiomeGraph } from '../../components/styled/BiomeGraph';
@@ -111,9 +112,7 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
     };
   });
 
-  const { image, name, exhibit } = post;
-
-  console.log(post.class);
+  const { image, name, exhibit, herd, class: dinoClass } = post;
 
   return (
     <>
@@ -147,6 +146,9 @@ export default function Dinosaur({ post }: { post: DinosaurType }): JSX.Element 
           {t('egg_items')}
         </Heading>
         <EggItems items={materials} />
+      </section>
+      <section className={classes.section}>
+        <Herd herd={herd} type={dinoClass} />
       </section>
     </>
   );
