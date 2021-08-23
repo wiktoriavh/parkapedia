@@ -1,18 +1,25 @@
 import { createUseStyles } from 'react-jss';
 
+import { getRandomItem } from '../../utils/getRandomItem';
+import { shadeColor } from '../../utils/shadeColor';
 import type { SvgIconProps } from './SvgIcon';
 import { SvgIcon } from './SvgIcon';
 
-const useStyle = createUseStyles({
-  body: {
-    fill: '#edbd5d',
-  },
-  bodyShadow: {
-    fill: '#ba7c3e',
-  },
-  markings: {
-    fill: '#e24b4b',
-  },
+const useStyle = createUseStyles((theme) => {
+  const colors = ['black', 'green', 'yellow', 'red', 'purple', 'orange', 'blue', 'pink'];
+  const main = getRandomItem(colors);
+  const markings = getRandomItem(colors);
+  return {
+    body: {
+      fill: theme.palette.dinos[main],
+    },
+    bodyShadow: {
+      fill: shadeColor(theme.palette.dinos[main], -20),
+    },
+    markings: {
+      fill: theme.palette.dinos[markings],
+    },
+  };
 });
 
 export function TheropodaDetailed(props: SvgIconProps): JSX.Element {
