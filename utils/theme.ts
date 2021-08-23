@@ -31,6 +31,16 @@ export const parkasaurusTheme: DefaultTheme = {
       alpine: '#00BE95',
       tundra: '#63D4F9',
     },
+    dinos: {
+      black: '#4B5663',
+      green: '#2ECC71',
+      yellow: '#FFB14D',
+      red: '#DA0069',
+      purple: '#843DDE',
+      orange: '#F15A45',
+      blue: '#F15A45',
+      pink: '#FD499E',
+    },
   },
   spacing: {
     normal: 20,

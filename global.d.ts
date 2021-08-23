@@ -1,6 +1,6 @@
 declare global {
   namespace Jss {
-    export interface Theme {
+    export type Theme = {
       palette: {
         black: HexColor;
         blue: HexColor;
@@ -22,11 +22,21 @@ declare global {
           alpine: HexColor;
           tundra: HexColor;
         };
+        dinos: {
+          black: HexColor;
+          green: HexColor;
+          yellow: HexColor;
+          red: HexColor;
+          purple: HexColor;
+          orange: HexColor;
+          blue: HexColor;
+          pink: HexColor;
+        };
       };
       spacing: {
         normal: number;
       };
-    }
+    };
   }
 }
 
