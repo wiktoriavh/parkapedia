@@ -26,21 +26,19 @@ export function Herd({ herd, type }: HerdProps): JSX.Element {
   const Dino = getDinoIcon(type);
   const classes = useStyles();
 
+  const dinoAmount = herd ? 5 : 2;
+
   return (
     <div className={classes.herd}>
-      <Dino height="250" />
-      <Dino height="250" />
-      <Dino height="250" />
-      <Dino height="250" />
-      <Dino height="250" />
+      {/* {[...Array(dinoAmount)].map((_) => (
+        <Dino height="250" />
+      ))} */}
     </div>
   );
 }
 
-function getDinoIcon(type): JSX.Element | null {
+function getDinoIcon(type: Pick<DinosaurType, 'class'>): JSX.Element {
   switch (type) {
-    case 'ankylosauria':
-      return AnkylosauriaDetailed;
     case 'ceratopsia':
       return CeratopsiaDetailed;
     case 'ornithopoda':
@@ -51,7 +49,8 @@ function getDinoIcon(type): JSX.Element | null {
       return SauropodaDetailed;
     case 'theropoda':
       return TheropodaDetailed;
+    case 'ankylosauria':
     default:
-      
+      return AnkylosauriaDetailed;
   }
 }
