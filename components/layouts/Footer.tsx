@@ -20,7 +20,7 @@ const useStyles = createUseStyles({
 export function Footer(): JSX.Element {
   const classes = useStyles();
 
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['biomes', 'common']);
 
   return (
     <footer className={classes.footer}>
@@ -28,8 +28,9 @@ export function Footer(): JSX.Element {
         <a className={classes.footerItem}>Impressum, aber in Englisch NICHT VERGESSEN</a>
       </Link>
       <Link href="/datenschutz" passHref>
-        <a className={classes.footerItem}>{t('privacyPolicy')}</a>
+        <a className={classes.footerItem}>{t('common:privacyPolicy')}</a>
       </Link>
+      <p>{t('biomes:etwas')}</p>
     </footer>
   );
 }
